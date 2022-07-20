@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="card box-shadow m-2 from-wrap">
+            <div class="card-header text-center">
+                <h1>Конвертер валют</h1>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+<form id='form' class="p-3" action="" method="POST">
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="form-group col-md-4 mb-0">
+            <label for="amount">Сумма</label>
+            <input id='amount' type="number" class="form-control" placeholder="Введите число" {% if from_amount %} value="{{ from_amount }}" {% endif %} name="from-amount">
+        </div>
+
+
+    <select name="from_curr" id="from_curr">
+        {% for curr in currencies %}
+            <option value="{{ curr }}" {% if from_curr == curr %}selected="selected"{% endif %}>{{ curr }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="to_curr" id="to_curr">
+        {% for curr in currencies %}
+            <option value="{{ curr }}" {% if to_curr == curr %}selected="selected"{% endif %}>{{ curr }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Расчитать</button>
+
+</form>
+
+{% if converted_amount %}
+<p>Результат:</p>
+<p>{{converted_amount}}</p>
+<p>Актуально на {{meta_up}}</p>
+{% endif %}
+
+{% endblock %}
