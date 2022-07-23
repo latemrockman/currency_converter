@@ -20,6 +20,7 @@ def exchange(request):
 
     all_currencies = [cur for cur in resp.keys()]
 
+
     context = {
         'currencies': all_currencies,
         'meta_up': meta_up
